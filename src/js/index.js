@@ -3,10 +3,10 @@
 import "../style/index.scss";
 
 function calculateTip() {
-  var billAmt = document.getElementById("Bill Amount").value;
-  var serviceQuality = document.getElementById("service qual").value;
+  var billAmt = document.getElementById("billamount").value;
+  var serviceQuality = document.getElementById("servicequal").value;
   var numberOfPeople = document.getElementById("people").value;
-  if (billAmt == "" || serviceQuality == 0) {
+  if (billAmt == "" || serviceQuality == "--Choose an Option--") {
     alert("Please enter values");
     return;
   }
@@ -17,16 +17,19 @@ function calculateTip() {
     document.getElementById("each").style.display = "block";
   }
   var total = (billAmt * serviceQuality) / numberOfPeople;
+  //   round total to 2 decimal places
   total = Math.round(total * 100) / 100;
   total = total.toFixed(2);
 
   document.getElementById("totalTip").style.display = "block";
   document.getElementById("tip").innerHTML = total;
-
-  document.getElementById("totalTip").style.display = "none";
-  document.getElementById("each").style.display = "none";
-
-  document.getElementById("caluclate").onclick = function() {
-    calculateTip();
-  };
 }
+
+//Hide the tip amount on load
+document.getElementById("totalTip").style.display = "none";
+document.getElementById("each").style.display = "none";
+
+//click to call function
+document.getElementById("calculate").onclick = function() {
+  calculateTip();
+};
